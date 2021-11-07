@@ -30,8 +30,10 @@ add.addEventListener('click', function(){
     if(parseInt(input.value)){
         const result = parseInt(account.textContent) + parseInt(input.value);
         account.innerText = `${result}`;
+        input.value = "";
     }else if(typeof input.value === 'string' && input.value !== ''){
         error.style.visibility = 'visible';
+        input.value = "";
     }
 })
 
@@ -40,8 +42,10 @@ subtraction.addEventListener('click', function(){
     if(parseInt(input.value)){
         const result = parseInt(account.textContent) - parseInt(input.value);
         account.innerText = `${result}`;
+        input.value = "";
     }else if(typeof input.value === 'string' && input.value !== ''){
         error.style.visibility = 'visible';
+        input.value = "";
     }
 })
 
