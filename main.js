@@ -8,18 +8,18 @@ var subtraction = document.querySelector("#subtraction");
 var seven_percent = document.querySelector("#seven-percent");
 var fifteen_percent = document.querySelector("#fifteen-percent");
 
-function buy(name, change, price){
-    if(buy_home[change] === true){
+function buy(buy_item,name, change, price){
+    if(buy_item[change] === true){
         const result = parseInt(account.textContent) - price;
         account.innerText = `${result}`;
         name.style.backgroundColor = "green";
         name.disabled = true;
-        console.log(buy_home[change]);
+        console.log(buy_item[change]);
 
 
-        buy_home[change] = !change;
+        buy_item[change] = !change;
 
-        console.log(buy_home[change]);
+        console.log(buy_item[change]);
     }
 }
 
@@ -33,6 +33,13 @@ add.addEventListener('click', function(){
         input.value = "";
     }else if(typeof input.value === 'string' && input.value !== ''){
         error.style.visibility = 'visible';
+
+        function hidden_error(){
+            error.style.visibility = 'hidden';
+        }
+
+        setTimeout(hidden_error, 2000);
+
         input.value = "";
     }
 })
@@ -72,16 +79,16 @@ var home_insurance = document.querySelector('#home-insurance');
 var buy_home = {'home_insurance_change': true}
 
 home_insurance.addEventListener('click', function(){
-    buy(home_insurance,'home_insurance_change', 30000);
+    buy(buy_home, home_insurance,'home_insurance_change', 30000);
 })
 
 // AUTÓ VÁSÁRLÁS
 
 var car = document.querySelector('#car');
-var car_change = true;
+var buy_car = {'car_change': true}
 
 car.addEventListener('click', function(){
-    buy(car, car_change, 7500000);
+    buy(buy_car,car, 'car_change', 7500000);
 })
 
 //HÁZ VÁSÁRLÁS
@@ -185,7 +192,7 @@ burn.addEventListener('click', function(){
     burn.style.backgroundColor = "red";
 
     function burn_color(){
-        burn.style.backgroundColor = "#fafafa";
+        burn.style.backgroundColor = "#D3290E";
     }
     
     setTimeout(burn_color, 1000);
@@ -202,14 +209,11 @@ burn.addEventListener('click', function(){
 
         account.innerText = `${result}`;
 
-        console.log(name_list);
-        console.log(change_list);
-
         price_list = [];
 
         for( let i of name_list){
-            i.style.backgroundColor = "#fafafa";
-            i.style.color = "black";
+            i.style.backgroundColor = "#D3290E";
+            i.style.color = "white";
             i.disabled = false;
 
         }
@@ -219,8 +223,8 @@ burn.addEventListener('click', function(){
         }
     }else{
         for( let i of name_list){
-            i.style.backgroundColor = "#fafafa";
-            i.style.color = "black";
+            i.style.backgroundColor = "#D3290E";
+            i.style.color = "white";
             i.disabled = false;
 
         }
