@@ -7,36 +7,34 @@ var add = document.querySelector("#add");
 var subtraction = document.querySelector("#subtraction");
 var seven_percent = document.querySelector("#seven-percent");
 var fifteen_percent = document.querySelector("#fifteen-percent");
+var add_half_million = document.querySelector("#add-half-million");
+var add_million = document.querySelector("#add-million");
 
-function buy(buy_item,name, change, price){
-    if(buy_item[change] === true){
-        const result = parseInt(account.textContent) - price;
-        account.innerText = `${result}`;
-        name.style.backgroundColor = "green";
-        name.disabled = true;
-        console.log(buy_item[change]);
+//Kiíratás
 
+function write_text(text, color){
+    error.style.visibility = 'visible';
+    error.innerText = text;
+    error.style.color = color;
+}
 
-        buy_item[change] = !change;
-
-        console.log(buy_item[change]);
-    }
+function hidden_error(){
+    error.style.visibility = 'hidden';
 }
 
 //BANKSZÁMLA MANIPULÁCIÓ
+
 
 add.addEventListener('click', function(){
 
     if(parseInt(input.value)){
         const result = parseInt(account.textContent) + parseInt(input.value);
-        account.innerText = `${result}`;
+        account.innerText = `${result} Ft`;
+        write_text(`Az összeget: ${parseInt(input.value)} Ft hozzáadtuk a számlájához!`, 'green')
+        setTimeout(hidden_error, 3000);
         input.value = "";
     }else if(typeof input.value === 'string' && input.value !== ''){
-        error.style.visibility = 'visible';
-
-        function hidden_error(){
-            error.style.visibility = 'hidden';
-        }
+        write_text('Kérem számot írjon be!', 'red')
 
         setTimeout(hidden_error, 2000);
 
@@ -48,7 +46,9 @@ subtraction.addEventListener('click', function(){
 
     if(parseInt(input.value)){
         const result = parseInt(account.textContent) - parseInt(input.value);
-        account.innerText = `${result}`;
+        account.innerText = `${result} Ft`;
+        write_text(`Az összeget: ${parseInt(input.value)} Ft levontuk a számlájáról!`, 'green')
+        setTimeout(hidden_error, 3000);
         input.value = "";
     }else if(typeof input.value === 'string' && input.value !== ''){
         error.style.visibility = 'visible';
@@ -59,27 +59,95 @@ subtraction.addEventListener('click', function(){
 seven_percent.addEventListener('click', function(){
 
     if(parseInt(account.textContent) > 0){
-        const result = parseInt(account.textContent)*0.07+parseInt(account.textContent);
-        account.innerText = `${result}`;
+        const result = parseInt(parseInt(account.textContent)*0.07)+parseInt(account.textContent);
+        write_text(`Az összeget: ${parseInt(parseInt(account.textContent)*0.07)} Ft hozzáadtuk a számlájához!`, 'green')
+        setTimeout(hidden_error, 3000);
+        account.innerText = `${result} Ft`;
     }
 })
 
 fifteen_percent.addEventListener('click', function(){
 
     if(parseInt(account.textContent) > 0){
-        const result = parseInt(account.textContent)*0.15+parseInt(account.textContent);
-        account.innerText = `${result}`;
+        const result = parseInt(parseInt(account.textContent)*0.15)+parseInt(account.textContent);
+        write_text(`Az összeget: ${parseInt(parseInt(account.textContent)*0.15)} Ft hozzáadtuk a számlájához!`, 'green')
+        setTimeout(hidden_error, 3000);
+        account.innerText = `${result} Ft`;
     }
 })
 
-// LAKÁSBÍZTOSÍTÁS VÁSÁRLÁSA
+add_half_million.addEventListener('click', function(){
+
+        const result = parseInt(account.textContent)+500000;
+        write_text(`Az összeget: ${500000} Ft hozzáadtuk a számlájához!`, 'green')
+        setTimeout(hidden_error, 3000);
+        account.innerText = `${result} Ft`;
+})
+
+add_million.addEventListener('click', function(){
+
+    const result = parseInt(account.textContent)+1000000;
+    write_text(`Az összeget: ${1000000} Ft hozzáadtuk a számlájához!`, 'green')
+    setTimeout(hidden_error, 3000);
+    account.innerText = `${result} Ft`;
+})
+
+//BIZTOSÍTÁSOK
 
 var home_insurance = document.querySelector('#home-insurance');
+var child_insurance = document.querySelector('#child-insurance');
+var pension_insurance = document.querySelector('#pension-insurance');
+var casco_insurance = document.querySelector('#casco-insurance');
 
-var buy_home = {'home_insurance_change': true}
+function buy(buy_item, name, change, price){
+    if(buy_item[change] === true){
+        const result = parseInt(account.textContent) - price;
+        account.innerText = `${result}`;
+        name.style.backgroundColor = "green";
+        name.disabled = true;
+
+        buy_item[change] = !change;
+    }
+}
+
+
+var buy_home = {
+    'home_insurance_change': true,
+    'child_insurance_change': true,
+    'pension_insurance_change': true,
+    'casco_insurance_change': true
+}
+
+// Lakás biztosítás
 
 home_insurance.addEventListener('click', function(){
     buy(buy_home, home_insurance,'home_insurance_change', 30000);
+    write_text(`Az összeget: ${30000} Ft levontuk a számlájáról!`, 'green')
+    setTimeout(hidden_error, 3000);
+})
+
+//Gyermekjövő biztosítás
+
+child_insurance.addEventListener('click', function(){
+    buy(buy_home, child_insurance,'child_insurance_change', 180000);
+    write_text(`Az összeget: ${180000} Ft levontuk a számlájáról!`, 'green')
+    setTimeout(hidden_error, 3000);
+})
+
+//Nyugdíjbiztosítás
+
+pension_insurance.addEventListener('click', function(){
+    buy(buy_home, pension_insurance,'pension_insurance_change', 180000);
+    write_text(`Az összeget: ${180000} Ft levontuk a számlájáról!`, 'green')
+    setTimeout(hidden_error, 3000);
+})
+
+//Casco biztosítás
+
+casco_insurance.addEventListener('click', function(){
+    buy(buy_home, casco_insurance,'casco_insurance_change', 50000);
+    write_text(`Az összeget: ${50000} Ft levontuk a számlájáról!`, 'green')
+    setTimeout(hidden_error, 3000);
 })
 
 // AUTÓ VÁSÁRLÁS
@@ -89,6 +157,8 @@ var buy_car = {'car_change': true}
 
 car.addEventListener('click', function(){
     buy(buy_car,car, 'car_change', 7500000);
+    write_text(`Az összeget: ${7500000} Ft levontuk a számlájáról!`, 'green')
+    setTimeout(hidden_error, 3000);
 })
 
 //HÁZ VÁSÁRLÁS
@@ -105,13 +175,9 @@ home.addEventListener('click', function(){
         home.style.backgroundColor = "green";
         home.disabled = true;
         furniture.style.visibility = 'visible';
+        write_text(`Az összeget: ${9500000} Ft levontuk a számlájáról!`, 'green')
+        setTimeout(hidden_error, 3000);
 
-        home_change = !home_change;
-    }else{
-        const result = parseInt(account.textContent) + 9500000;
-        account.innerText = `${result}`;
-        home.style.backgroundColor = "#fafafa";
-        furniture.style.visibility = 'hidden';
         home_change = !home_change;
     }
 })
@@ -148,6 +214,8 @@ function buy_furniture(name, change, price){
         price_list.push(price);
         name_list.push(name);
         change_list.push(change);
+        write_text(`Az összeget: ${price} Ft levontuk a számlájáról!`, 'green')
+        setTimeout(hidden_error, 3000);
     }
 }
 
@@ -199,6 +267,9 @@ burn.addEventListener('click', function(){
 
     let price_count = 0;
 
+    write_text('A lakása leégett!\nHa volt lakásbiztosítása a leégett bútorok árát hozzáadjuk a számlájához!', 'red')
+    setTimeout(hidden_error, 10000);
+
     if(buy_home['home_insurance_change'] === false){
         for(let i of price_list){
 
@@ -236,3 +307,4 @@ burn.addEventListener('click', function(){
 
 
 })
+

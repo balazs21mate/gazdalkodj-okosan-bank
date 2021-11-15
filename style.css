@@ -30,7 +30,18 @@ html {
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      
+      text-align: center;
+      margin: 0.5rem auto;
+      width: 100px;
+      height: 50px;
+  }
+
+  #title{
+    color: #D3290E;
+  }
+
+  #title span {
+    color: white;
   }
 
   input[type=text] {
@@ -38,7 +49,7 @@ html {
     box-shadow: 2px 2px rgba(0, 0, 0, 0.6);
     width: 90%;
     padding: 12px 20px;
-    margin: 8px auto;
+    margin: 0 auto 15px auto;
     box-sizing: border-box;
   }
 
@@ -47,33 +58,56 @@ html {
       border-radius: 50px;
       box-shadow: 2px 2px rgba(0, 0, 0, 0.6);
       display: flex;
-      width: 50%;
+      width: 90%;
       margin: 0 auto;
       margin-top: 1rem;
       text-align: center;
       flex-direction: column;
   }
 
-  .bank-account{
+  .container p {
     color: white;
+  }
+
+  .bank-account{
+    color: #D3290E;
   }
 
   .change-account{
       display: flex;
       flex-direction: column;
+      width: 90%;
+      border: 1px solid black;
       margin: 1rem auto;
-  }
-
-  .change-account button{
-      margin: 1px auto 1px auto;
-      width: 100px;
-      height: 50px;
   }
 
   #error{
     margin: 0 auto 0 auto;
-    color: red;
     visibility: hidden;
+  }
+
+  #root{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    border: 1px solid black;
+    width: 90%;
+  }
+
+  #home-buttons{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  #insurences{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  #insurences button{
+    width: 120px;
   }
   
   #burn{
@@ -81,13 +115,6 @@ html {
     width: 100px;
     height: 50px;
   }
-
-  #home-insurance{
-    margin: 0.5rem auto;
-    width: 100px;
-    height: 50px;
-}
-
 
   #car{
     margin: 0.5rem auto;
