@@ -77,7 +77,6 @@ html {
       display: flex;
       flex-direction: column;
       width: 90%;
-      border: 1px solid black;
       margin: 1rem auto;
   }
 
@@ -90,7 +89,6 @@ html {
     display: flex;
     flex-direction: row;
     margin: 0 auto;
-    border: 1px solid black;
     width: 90%;
   }
 
