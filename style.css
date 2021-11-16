@@ -130,7 +130,6 @@ html {
       display: flex;
       flex-direction: column;
       margin: 1rem auto;
-      visibility: hidden;
   }
 
   .in-house button {
