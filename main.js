@@ -59,6 +59,22 @@ var insurances_bool = false;
 var insurances_prices = [];
 var insurances_price = 0;
 
+var home_credit = document.querySelector('#home-credit');
+var car_credit = document.querySelector('#car-credit');
+
+var home_remaining = document.querySelector('#home-remaining');
+var home_paid = document.querySelector('#home-paid');
+var car_remaining = document.querySelector('#car-remaining');
+var car_paid = document.querySelector('#car-paid');
+
+var credits= {
+    'home_credit_change': true,
+    'car_credit_change': true,
+}
+
+var home_credit_repay = document.querySelector('#home-credit-repay');
+var home_credit_repay_button = document.querySelector('#home-credit-repay-button');
+
 //Kiíratás
 
 function write_text(text, color){
@@ -71,11 +87,14 @@ function hidden_error(){
     error.style.visibility = 'hidden';
 }
 
-function buy(buy_item, name, change, price, text){
+function buy(buy_item, name, change, price, text, boolen){
     if(buy_item[change] === true && (parseInt(account.textContent)  - price) >= 0){
         const result = parseInt(account.textContent) - price;
         account.innerText = `${result} Ft`;
         name.style.backgroundColor = "green";
+        name.style.color = "white";
+        name.style.boxShadow = "none";
+        name.style.border = "none";
         name.disabled = true;
 
         buy_item[change] = !change;
@@ -83,15 +102,30 @@ function buy(buy_item, name, change, price, text){
         setTimeout(hidden_error, 3000);
 
         prize_change = false;
-        prize.style.backgroundColor = "#D3290E";
-        
-        insurances_prices.push(price);
+        prize.style.backgroundColor = "white";
+        prize.style.color = "#D3290E";
+        prize.style.boxShadow = "2px 2px 2px #D3290E";
+        prize.style.border = "1px solid #D3290E";
+
+        if(boolen){
+            if(change === 'home_credit_change'){
+                insurances_prices.push(90000);
+            }else if(change === 'car_credit_change'){
+                insurances_prices.push(156250);
+            }else{
+                insurances_prices.push(price);
+            }
+        }
+
     }else{
         write_text('Nincs elegendő pénz a számláján!', 'red')
         setTimeout(hidden_error, 3000);
 
         prize_change = false;
-        prize.style.backgroundColor = "#D3290E";
+        prize.style.backgroundColor = "white";
+        prize.style.color = "#D3290E";
+        prize.style.boxShadow = "2px 2px 2px #D3290E";
+        prize.style.border = "1px solid #D3290E";
     }
 }
 
@@ -100,7 +134,7 @@ function buy(buy_item, name, change, price, text){
 
 add.addEventListener('click', function(){
 
-    if(parseInt(input.value) && parseInt(account.textContent) > 0){
+    if(parseInt(input.value) && parseInt(account.textContent) >= 0){
         const result = parseInt(account.textContent) + parseInt(input.value);
         account.innerText = `${result} Ft`;
         write_text(`Az összeget: ${parseInt(input.value)} Ft hozzáadtuk a számlájához!`, 'green')
@@ -172,7 +206,30 @@ add_half_million.addEventListener('click', function(){
         setTimeout(hidden_error, 3000);
         account.innerText = `${result} Ft`;
     }
-        
+    
+    if(credits['home_credit_change'] === false && parseInt(home_remaining.textContent) > 0){
+        home_remaining_price = parseInt(home_remaining.textContent) - 90000
+        home_remaining.innerText = `${home_remaining_price} Ft`
+
+        if(home_remaining_price === 0){
+            insurances_prices.pop(90000)
+        }
+
+        home_paid_price = parseInt(home_paid.textContent) + 90000
+        home_paid.innerText = `${home_paid_price} Ft`
+    }
+
+    if(credits['car_credit_change'] === false && parseInt(car_remaining.textContent) > 0){
+        car_remaining_price = parseInt(car_remaining.textContent) - 156250
+        car_remaining.innerText = `${car_remaining_price} Ft`
+
+        if(car_remaining_price === 0){
+            insurances_prices.pop(156250)
+        }
+
+        car_paid_price = parseInt(car_paid.textContent) + 156250
+        car_paid.innerText = `${car_paid_price} Ft`
+    }
 })
 
 add_million.addEventListener('click', function(){
@@ -192,6 +249,30 @@ add_million.addEventListener('click', function(){
         setTimeout(hidden_error, 3000);
         account.innerText = `${result} Ft`;
     }
+
+    if(credits['home_credit_change'] === false && parseInt(home_remaining.textContent) > 0){
+        home_remaining_price = parseInt(home_remaining.textContent) - 90000
+        home_remaining.innerText = `${home_remaining_price} Ft`
+
+        if(home_remaining_price === 0){
+            insurances_prices.pop(90000)
+        }
+
+        home_paid_price = parseInt(home_paid.textContent) + 90000
+        home_paid.innerText = `${home_paid_price} Ft`
+    }
+
+    if(credits['car_credit_change'] === false && parseInt(car_remaining.textContent) > 0){
+        car_remaining_price = parseInt(car_remaining.textContent) - 156250
+        car_remaining.innerText = `${car_remaining_price} Ft`
+
+        if(car_remaining_price === 0){
+            insurances_prices.pop(156250)
+        }
+
+        car_paid_price = parseInt(car_paid.textContent) + 156250
+        car_paid.innerText = `${car_paid_price} Ft`
+    }
 })
 
 // NYEREMÉNY
@@ -199,6 +280,9 @@ add_million.addEventListener('click', function(){
 prize.addEventListener('click', function(){
     if(prize_change === false){
         prize.style.backgroundColor = "green";
+        prize.style.color = "white";
+        prize.style.boxShadow = "none";
+        prize.style.border = "none";
         prize_change = !prize_change;
     }
 })
@@ -208,28 +292,28 @@ prize.addEventListener('click', function(){
 
 home_insurance.addEventListener('click', function(){
     insurances_bool = true;
-    buy(buy_home, home_insurance,'home_insurance_change', 30000, `Az összeget: ${30000} Ft levontuk a számlájáról!`);
+    buy(buy_home, home_insurance,'home_insurance_change', 30000, `Az összeget: ${30000} Ft levontuk a számlájáról!`, true);
 })
 
 //Gyermekjövő biztosítás
 
 child_insurance.addEventListener('click', function(){
     insurances_bool = true;
-    buy(buy_home, child_insurance,'child_insurance_change', 180000,`Az összeget: ${180000} Ft levontuk a számlájáról!`);
+    buy(buy_home, child_insurance,'child_insurance_change', 180000,`Az összeget: ${180000} Ft levontuk a számlájáról!`, true);
 })
 
 //Nyugdíjbiztosítás
 
 pension_insurance.addEventListener('click', function(){
     insurances_bool = true;
-    buy(buy_home, pension_insurance,'pension_insurance_change', 180000, `Az összeget: ${180000} Ft levontuk a számlájáról!`);
+    buy(buy_home, pension_insurance,'pension_insurance_change', 180000, `Az összeget: ${180000} Ft levontuk a számlájáról!`, true);
 })
 
 //Casco biztosítás
 
 casco_insurance.addEventListener('click', function(){
     insurances_bool = true;
-    buy(buy_home, casco_insurance,'casco_insurance_change', 50000, `Az összeget: ${50000} Ft levontuk a számlájáról!`);
+    buy(buy_home, casco_insurance,'casco_insurance_change', 50000, `Az összeget: ${50000} Ft levontuk a számlájáról!`, true);
 })
 
 // AUTÓ VÁSÁRLÁS
@@ -240,6 +324,7 @@ car.addEventListener('click', function(){
     }else{
         buy(buy_car,car, 'car_change', 0, `Az összeget: ${0} Ft levontuk a számlájáról!`);
     }
+    car_credit.disabled = true
 })
 
 //HÁZ VÁSÁRLÁS
@@ -247,6 +332,7 @@ car.addEventListener('click', function(){
 home.addEventListener('click', function(){
 
     buy(buy_house,home, 'home_change', 9500000, `Az összeget: ${9500000} Ft levontuk a számlájáról!`);
+    home_credit.disabled = true
 })
 
 //BÚTOR VÁSÁRLÁS
@@ -256,6 +342,9 @@ function buy_furniture(name, change, price){
         const result = parseInt(account.textContent) - price;
         account.innerText = `${result} Ft`;
         name.style.backgroundColor = "green";
+        name.style.color = "white";
+        name.style.boxShadow = "none";
+        name.style.border = "none";
         name.disabled = true;
         furnitures[change] = !change;
         price_list.push(price);
@@ -265,13 +354,19 @@ function buy_furniture(name, change, price){
         setTimeout(hidden_error, 3000);
 
         prize_change = false;
-        prize.style.backgroundColor = "#D3290E";
+        prize.style.backgroundColor = "white";
+        prize.style.color = "#D3290E";
+        prize.style.boxShadow = "2px 2px 2px #D3290E";
+        prize.style.border = "1px solid #D3290E";
     }else{
         write_text('Nincs elegendő pénz a számláján!', 'red')
         setTimeout(hidden_error, 3000);
 
         prize_change = false;
-        prize.style.backgroundColor = "#D3290E";
+        prize.style.backgroundColor = "white";
+        prize.style.color = "#D3290E";
+        prize.style.boxShadow = "2px 2px 2px #D3290E";
+        prize.style.border = "1px solid #D3290E";
     }
 }
 
@@ -321,10 +416,12 @@ washing_machine.addEventListener('click', function(){
 
 burn.addEventListener('click', function(){
 
-    burn.style.backgroundColor = "red";
+    burn.style.backgroundColor = "#D3290E";
+    burn.style.color = "white";
 
     function burn_color(){
-        burn.style.backgroundColor = "#D3290E";
+        burn.style.backgroundColor = "white";
+        burn.style.color = "#D3290E";
     }
     
     setTimeout(burn_color, 1000);
@@ -347,8 +444,10 @@ burn.addEventListener('click', function(){
         price_list = [];
 
         for( let i of name_list){
-            i.style.backgroundColor = "#D3290E";
-            i.style.color = "white";
+            i.style.backgroundColor = "white";
+            i.style.color = "#D3290E";
+            i.style.boxShadow = "2px 2px 2px #D3290E";
+            i.style.border = "1px solid #D3290E";
             i.disabled = false;
 
         }
@@ -358,8 +457,10 @@ burn.addEventListener('click', function(){
         }
     }else{
         for( let i of name_list){
-            i.style.backgroundColor = "#D3290E";
-            i.style.color = "white";
+            i.style.backgroundColor = "white";
+            i.style.color = "#D3290E";
+            i.style.boxShadow = "2px 2px 2px #D3290E";
+            i.style.border = "1px solid #D3290E";
             i.disabled = false;
 
         }
@@ -370,4 +471,46 @@ burn.addEventListener('click', function(){
     }
 
 
+})
+
+// HITELEK
+// Lakáshitel
+
+home_credit.addEventListener('click', function(){
+    insurances_bool = true;
+    buy(credits, home_credit,'home_credit_change', 2000000, `Az összeget: ${2000000} Ft levontuk a számlájáról!`, true);
+    home_remaining.innerText = '9000000 Ft'
+    home.disabled = true
+})
+
+// Előtőrlesztés
+
+home_credit_repay_button.addEventListener('click', function(){
+    if(parseInt(home_credit_repay.value) && credits['home_credit_change'] === false){
+        home_remaining_price = parseInt() - parseInt(home_credit_repay.value)
+        home_remaining.innerText = `${home_remaining_price} Ft`
+        home_paid.innerText = `${parseInt(home_paid.textContent) + parseInt(home_credit_repay.value)} Ft`;
+        home_credit_repay.value = "";
+
+        if(home_remaining_price === 0){
+            insurances_prices.pop(90000)
+        }
+
+    }else if(home_credit_repay.value && home_credit_repay.value !== ''){
+
+        write_text('Kérem számot írjon be!', 'red')
+
+        setTimeout(hidden_error, 2000);
+
+        home_credit_repay.value = "";
+    }
+})
+
+// Autó hitel
+
+car_credit.addEventListener('click', function(){
+    insurances_bool = true;
+    buy(credits, car_credit,'car_credit_change', 2000000, `Az összeget: ${2000000} Ft levontuk a számlájáról!`, true);
+    car_remaining.innerText = '6250000 Ft'
+    car.disabled = true
 })

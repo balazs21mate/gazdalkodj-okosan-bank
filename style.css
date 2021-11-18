@@ -24,10 +24,10 @@ html {
 
   button{
       border-radius: 50px;
-      box-shadow: 2px 2px rgba(0, 0, 0, 0.4);
-      background-color: #D3290E;
-      color: white;
-      border: none;
+      box-shadow: 2px 2px 2px #D3290E;
+      border: 1px solid #D3290E;
+      background-color: white;
+      color: #D3290E;
       border-radius: 5px;
       cursor: pointer;
       text-align: center;
@@ -36,12 +36,23 @@ html {
       height: 50px;
   }
 
-  #title{
-    color: #D3290E;
+  button:hover{
+    background-color: #D3290E;
+    color: white;
   }
 
-  #title span {
-    color: white;
+  h1{
+    color: #101A83;
+    margin-top: 10px;
+  }
+
+  h4{
+    color: #101A83;
+  }
+
+  p{
+    color: #D3290E;
+    margin: 2px auto;
   }
 
   input[type=text] {
@@ -54,9 +65,7 @@ html {
   }
 
   .container{
-      background-color: #101A83;
       border-radius: 50px;
-      box-shadow: 2px 2px rgba(0, 0, 0, 0.6);
       display: flex;
       width: 90%;
       margin: 0 auto;
@@ -65,8 +74,8 @@ html {
       flex-direction: column;
   }
 
-  .container p {
-    color: white;
+  #title{
+    color: #D3290E;
   }
 
   .bank-account{
@@ -76,6 +85,9 @@ html {
   .change-account{
       display: flex;
       flex-direction: column;
+      border: 1px solid #101A83;
+      border-radius: 3px 10px 10px 3px;
+      box-shadow: 5px 5px 5px #101A83;
       width: 90%;
       margin: 1rem auto;
   }
@@ -88,6 +100,9 @@ html {
   #root{
     display: flex;
     flex-direction: row;
+    border: 1px solid #101A83;
+    border-radius: 3px 10px 10px 3px;
+    box-shadow: 5px 5px 5px #101A83;
     margin: 0 auto;
     width: 90%;
   }
@@ -107,7 +122,25 @@ html {
   #insurences button{
     width: 120px;
   }
+
+  #credit button{
+    height: 30px;
+  }
   
+  #repay{
+    display: flex;
+    flex-direction: column;
+  }
+
+  #repay input{
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+
+  #repay button {
+    width: auto;
+  }
+
   #burn{
     margin: 0.5rem auto;
     width: 100px;
