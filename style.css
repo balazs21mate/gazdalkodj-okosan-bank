@@ -1,3 +1,5 @@
+
+
 html {
     box-sizing: border-box;
     font-size: 16px;
@@ -34,11 +36,6 @@ html {
       margin: 0.5rem auto;
       width: 100px;
       height: 50px;
-  }
-
-  button:hover{
-    background-color: #D3290E;
-    color: white;
   }
 
   h1{
@@ -89,7 +86,7 @@ html {
       border-radius: 3px 10px 10px 3px;
       box-shadow: 5px 5px 5px #101A83;
       width: 90%;
-      margin: 1rem auto;
+      margin: 0 auto 1rem auto;
   }
 
   #error{
@@ -121,6 +118,15 @@ html {
 
   #insurences button{
     width: 120px;
+    height: 35px;
+  }
+
+  #credit{
+    width: 90%;
+    margin: 10px auto 0 auto;
+    border: 1px solid #D3290E;
+    border-radius: 5px;
+    box-shadow: 2px -2px 5px 2px #D3290E;
   }
 
   #credit button{
@@ -169,4 +175,25 @@ html {
       margin-top: 10px;
       width: 100px;
       height: 30px;
+  }
+
+  @media screen and (min-width: 800px){
+    .container{
+      flex-direction: row;
+    }
+
+    .change-account{
+      margin-right: 10px;
+    }
+  }
+
+  @media screen and (min-width: 1200px){
+    .container{
+      width: 50%;
+      flex-direction: row;
+    }
+
+    .change-account{
+      margin-right: 10px;
+    }
   }
