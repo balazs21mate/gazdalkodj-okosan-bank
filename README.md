@@ -1,1 +1,2 @@
 # gazdalkodj-okosan-bank
+
