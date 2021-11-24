@@ -177,7 +177,7 @@ html {
       height: 30px;
   }
 
-  @media screen and (min-width: 800px){
+  @media screen and (min-width: 600px){
     .container{
       flex-direction: row;
     }
