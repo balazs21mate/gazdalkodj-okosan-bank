@@ -1,7 +1,11 @@
 var account = document.querySelector(".bank-account")
 
 function getAccount(params) {
-    account.textContent = localStorage.getItem("new_account") + " Ft"
+    if (localStorage.getItem("new_account")){
+        account.textContent = localStorage.getItem("new_account") + " Ft"
+    }else{
+        account.textContent = "3000000 Ft"
+    }
 }
 
 var input = document.querySelector("#input")
