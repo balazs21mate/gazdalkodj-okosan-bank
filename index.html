@@ -10,13 +10,14 @@
 
     <title>Gazdálkodj okosan bank</title>
 </head>
-<body>
+<body onload=getAccount()>
     <div class="container">
             <div class="change-account">
                 <h1 >Gazdálkodj <span id="title"> Okosan!</span></h1>
                 <h1 class="bank-account">3000000 Ft</h1>
+                <button id="new-game">Új játék</button>
                 <p id="error">aaa</p>
-                <input id="input" type="text" placeholder="Ide írja az összeget...">
+                <input id="input" type="number" placeholder="Ide írja az összeget...">
                 <div>
                     <button id="add">+</button>
                     <button id="subtraction">-</button>
@@ -25,6 +26,7 @@
                     <button id="add-half-million">+500000 Ft</button>
                     <button id="add-million">+1000000 Ft</button>
                 </div>
+                <button id="back">Vissza</button>
             </div>
 
             <div id="root">
@@ -53,7 +55,7 @@
                     <div id="credit">
                         <button id="home-credit">Lakáshitel</button>
                         <div id="repay">
-                            <input id='home-credit-repay' type="text" placeholder="Törlesztő részlet...">
+                            <input id='home-credit-repay' type="number" placeholder="Törlesztő...">
                             <button id="home-credit-repay-button">Törleszt</button>
                         </div>
                         <h4>Fennmaradó:</h4>
